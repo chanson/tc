@@ -1,0 +1,16 @@
+%h3
+  = "Tasks for #{current_user.name}:"
+
+- @tasks.each do |deadline, tasks|
+  %h4= deadline
+  %table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Deadline
+        %th Repeatable
+        %th Completed
+      %tbody
+        = render :partial => 'task', :collection => tasks, :as => :task
+
+

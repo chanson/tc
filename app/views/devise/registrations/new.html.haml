@@ -1,0 +1,14 @@
+%h2 Sign up
+= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
+  = f.error_notification
+  = display_base_errors resource
+  = f.input :name, :autofocus => true
+  = f.input :email, :required => true
+  = f.file_field :avatar_image
+  = f.check_box :remove_cover_image if @user.avatar_image_uid
+  = image_tag @album.cover_image.thumb('100x100').url if @user.avatar_image_uid
+  = f.hidden_field :retained_avatar_image
+  = f.input :password, :required => true
+  = f.input :password_confirmation, :required => true
+  = f.button :submit, 'Sign up', :class => 'btn-primary'
+= render "devise/shared/links"

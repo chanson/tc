@@ -1,0 +1,8 @@
+%tr
+  %td= task.name
+  %td= task.deadline
+  %td= task.repeatable
+  %td= task.description
+  %td= link_to 'View', task_path(task)
+  %td= link_to 'Edit', edit_task_path(task)
+  %td= link_to 'Delete', task_path(task), :method => :delete, :confirm => 'Are you sure you want to delete this task?'
