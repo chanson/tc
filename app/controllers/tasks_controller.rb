@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_filter :find_task, :only => [:edit, :update, :show, :destroy]
+  before_filter :find_task_two, :only => [:complete_task]
 
   def create
     @task = Task.create(task_params.merge({ :user_id => current_user.id }))
@@ -7,7 +8,7 @@ class TasksController < ApplicationController
     puts params[:task]
 
     if @task.save
-      redirect_to :root, :notice => 'Task created.'
+      redirect_to tasks_path, :notice => 'Task created.'
     else
       flash[:error] = @task.errors.full_messages.join(', ')
       render :edit
@@ -48,10 +49,22 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  def complete_task
+    if @task.update_attributes({ :completed => !@task.completed })
+      redirect_to tasks_path, :success => 'Task updated.'
+    else
+      render :index, :error => 'Could not update task.'
+    end
+  end
+
   private
 
   def find_task
     @task = Task.find(params[:id])
+  end
+
+  def find_task_two
+    @task = Task.find(params[:task_id])
   end
 
   def task_params

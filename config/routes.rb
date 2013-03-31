@@ -6,5 +6,7 @@ Tc::Application.routes.draw do
   devise_for :users
   resources :users
 
-  resources :tasks
+  resources :tasks do
+    post 'complete_task'
+  end
 end

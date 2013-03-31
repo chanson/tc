@@ -1,3 +1,14 @@
 @import "bootstrap";
-body { padding-top: 60px; }
+body {
+  padding-top: 60px;
+  background-image: url("/assets/paper002.jpg");
+}
 @import "bootstrap-responsive";
+
+.container {
+  width: 700px;
+}
+
+.accordion-group {
+  background-color: white;
+}

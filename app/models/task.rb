@@ -31,13 +31,13 @@ class Task < ActiveRecord::Base
     deadline = Task::Deadlines::ANY if deadline.blank?
     case deadline
     when Task::Deadlines::EXPIRED
-      where("deadline < ? AND completed = false", Date.today)
+      where("deadline < ? AND completed = false", Time.now.utc)
     when Task::Deadlines::TODAY
       where("deadline = ?", Date.today)
     when Task::Deadlines::TOMORROW
-      where("deadline > ? AND deadline <= ?", Date.today, Date.tomorrow)
+      where("deadline > ? AND deadline <= ?", Time.now.utc, 1.day.from_now)
     when Task::Deadlines::WEEK
-      where("deadline > ? AND deadline <= ?", Date.tomorrow, 1.week.from_now)
+      where("deadline > ? AND deadline <= ?", 1.day.from_now, 1.week.from_now)
     when Task::Deadlines::MONTH
       where("deadline > ? AND deadline <= ?", 1.week.from_now, 1.month.from_now)
     when Task::Deadlines::FUTURE

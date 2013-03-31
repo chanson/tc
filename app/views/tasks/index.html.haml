@@ -1,16 +1,23 @@
-%h3
-  = "Tasks for #{current_user.name}:"
+%div.clearfix
+  %h3.pull-left= "Tasks for #{current_user.name}:"
+  %button.btn.pull-right= link_to 'New Task', new_task_path
+%div.accordion{ :id => 'taskAccordion' }
+  - @tasks.each do |deadline, tasks|
+    %div.accordion-group
+      %div.accordion-heading.clearfix
+        %a.accordion-toggle.pull-left{ :data => { :toggle => 'collapse', :target => "##{deadline}" } }
+          = deadlineString(deadline)
+        %i.icon-plus.pull-right{ :id => "#{deadline}-icon" }
+      %div.accordion-body.collapse{ :id => deadline }
+        %div.accordion-inner
+          %table.table-striped
+            %thead
+              %tr
+                %th Name
+                %th Deadline
+                %th Repeatable
+                %th Completed
+              %tbody
+                = render :partial => 'task', :collection => tasks, :as => :task
 
-- @tasks.each do |deadline, tasks|
-  %h4= deadline
-  %table.table-striped
-    %thead
-      %tr
-        %th Name
-        %th Deadline
-        %th Repeatable
-        %th Completed
-      %tbody
-        = render :partial => 'task', :collection => tasks, :as => :task
-
-
+  / = javascript_include_tag 'tasks'
