@@ -1,6 +1,8 @@
 %h3 User
 %p
-  = image_tag @user.avatar_image.thumb('200x200#').url
+  = image_tag @user.avatar_image.thumb('200x200#').url if @user.avatar_image.present?
   User: #{@user.name}
 %p
   Email: #{@user.email if @user.email}
+%p
+  = "Total Tasks Completed: #{@user.completed_count}"

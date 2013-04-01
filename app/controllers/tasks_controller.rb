@@ -24,7 +24,11 @@ class TasksController < ApplicationController
 
   def update
     if @task.update_attributes(task_params)
-      redirect_to tasks_path
+      if request.xhr?
+        head :ok
+      else
+        redirect_to tasks_path
+      end
     else
       render :edit
     end

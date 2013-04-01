@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
     # assign a default role if no role is assigned
     self.add_role :user if self.roles.first.nil?
   end
+
+  def completed_count
+    self.tasks.completed.count
+  end
 end

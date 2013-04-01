@@ -27,6 +27,8 @@ class Task < ActiveRecord::Base
   end
 
   #Scopes
+  scope :completed, where(:completed => true)
+
   def self.with_deadline(deadline)
     deadline = Task::Deadlines::ANY if deadline.blank?
     case deadline
@@ -49,8 +51,8 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def self.for_user(user_id)
-    where(:user_id => user_id)
+  def self.active_for_user(user_id)
+    where(:user_id => user_id, :completed => false)
   end
 
   #Methods

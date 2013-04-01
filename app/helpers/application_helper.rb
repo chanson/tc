@@ -12,4 +12,10 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def link_to_void(*args, &block)
+    name = args.first.is_a?(::Hash) ? '' : args.first
+    html_opts = args.extract_options!.symbolize_keys
+    html_opts.merge! :href => 'javascript:void(0)'
+    content_tag :a, name, html_opts, &block
+  end
 end
