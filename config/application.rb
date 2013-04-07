@@ -69,6 +69,9 @@ module Tc
     config.assets.version = '1.0'
 
     config.assets.initialize_on_precompile = false
+    config.assets.precompile += [
+      'vendor/chosen.css'
+    ]
 
     # config.to_prepare do
     #   Devise::SessionsController.layout "sign_in"

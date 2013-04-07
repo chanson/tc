@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :avatar_image, :retained_avatar_image, :remove_avatar_image
 
   has_many :tasks
+  has_many :projects
 
   before_create :assign_role
 

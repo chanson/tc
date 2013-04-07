@@ -1,0 +1,10 @@
+%h3 Project Information
+
+= simple_form_for @project, :defaults => { :html => { :class => 'form-vertical' } } do |f|
+  = f.input :name, :autofocus => true
+  = f.input :description, :ad => :text
+  = f.input :deadline, :as => :date
+  = f.association :tasks, :collection => @tasks, :multiple => true, :input_html => { :class => 'chzn-select' }
+  / # = link_to 'New Task', new_task_path, :data => { :remote => :true, :target => '#js-new-task', :toggle => 'modal' }, :class => 'btn btn-primary js-new-task-button'
+  %a.btn{'href' => '#new-task-modal', 'data-toggle' => 'modal'} New Task
+  = f.button :submit, :class => 'btn-primary'

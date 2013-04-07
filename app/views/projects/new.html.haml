@@ -1,0 +1,27 @@
+%h2 New Project
+= render 'form'
+
+#new-task-modal{'class' => 'modal hide fade'}
+  .modal-header
+    %h2 New Task
+    %a.btn{ :data => { :dismiss => 'modal' } }
+  .modal-body
+    = simple_form_for Task.new, :defaults => { :html => { :class => 'form-vertical' } }, :remote => true, :html => { :data => { :type => :json } } do |f|
+      = f.input :name, :autofocus => true
+      = f.input :description
+      = f.input :deadline, :as => :date
+      = f.input :repeatable, :as => :boolean
+      = f.input :repeat_type
+      = f.button :submit, :class => 'btn-primary'
+
+/ .modal-footer
+/ # = submit_tag 'Save & Continue', :class => 'button primary full-width'
+
+/ .modal.fade#new-task-modal
+/   .modal-header
+/     %h2 New Task
+/     %a.btn{ :data => { :dismiss => 'modal' } }
+/   .modal-body
+/   .modal-footer
+/     = submit_tag 'Save & Continue', :class => 'button primary full-width',
+/       :id => 'js-new-task-commit', :disabled => true

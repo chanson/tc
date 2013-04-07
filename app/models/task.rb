@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
   validates :completed, :inclusion => { :in => [true, false] }
 
   belongs_to :user
+  belongs_to :project
 
   with_options(:if => :repeatable) do |t|
     t.validates_presence_of :repeat_type
@@ -51,8 +52,12 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def self.active_for_user(user_id)
-    where(:user_id => user_id, :completed => false)
+  def self.for_user(user_id)
+    where(:user_id => user_id)
+  end
+
+  def self.standalone_for_user(user_id)
+    where(:user_id => user_id, :completed => false, :project_id => :null)
   end
 
   #Methods

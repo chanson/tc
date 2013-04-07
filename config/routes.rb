@@ -9,4 +9,6 @@ Tc::Application.routes.draw do
   resources :tasks do
     post 'complete_task'
   end
+
+  resources :projects
 end

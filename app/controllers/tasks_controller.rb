@@ -5,13 +5,21 @@ class TasksController < ApplicationController
   def create
     @task = Task.create(task_params.merge({ :user_id => current_user.id }))
 
-    puts params[:task]
+    # if @task.save
+    #   redirect_to tasks_path, :notice => 'Task created.'
+    # else
+    #   flash[:error] = @task.errors.full_messages.join(', ')
+    #   render :edit
+    # end
 
-    if @task.save
-      redirect_to tasks_path, :notice => 'Task created.'
-    else
-      flash[:error] = @task.errors.full_messages.join(', ')
-      render :edit
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.json { render json: @task, status: :created, location: @task }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 
