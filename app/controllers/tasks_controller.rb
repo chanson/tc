@@ -90,7 +90,8 @@ class TasksController < ApplicationController
       # :"deadline(3i)",
       :repeatable,
       :repeat_type,
-      :completed
+      :completed,
+      :tasks_attributes
     )
   end
 end

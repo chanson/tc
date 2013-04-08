@@ -1,0 +1,16 @@
+%table#tasks-table.table.table-hover.table-striped
+  %thead
+    %th Name
+    %th Description
+    / %th Deadline
+    %th Completed
+    %th
+  %tbody
+    = f.fields_for(:tasks) do |tasks_form|
+      %tr.fields
+        %td= tasks_form.text_field(:name)
+        %td= tasks_form.text_field(:description)
+        / %td=
+        %td= tasks_form.check_box(:completed)
+        %td
+          = link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, tasks_form, :title => "Delete this Task.")
