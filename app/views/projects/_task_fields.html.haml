@@ -4,9 +4,11 @@
     %h3 Add a Task
   .modal-body
     %fieldset
-      = f.text_field(:name)
-      = f.text_area :description
-      = f.hidden_field(:_destroy, :class => "field")
+      = f.input :name, :autofocus => true
+      = f.input :description
+      = f.input :deadline, :as => :string, :input_html => { :class => 'deadline' }
+      = f.input :completed
+      = f.input :_destroy, :as => :hidden, :class => "field"
   .modal-footer
-    %button#addButton.btn.btn-primary{"aria-hidden" => "true", "data-dismiss" => "modal", :title => "Add this Task.", :type => "button"} Add
+    %button#addButton.btn.btn-primary{"aria-hidden" => "true", "data-dismiss" => "modal", :title => "Add this Task.", :type => "button"}
     %button#cancelButton.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal", :title => "Close this screen without adding the Task.", :type => "button"} Cancel

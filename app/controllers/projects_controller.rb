@@ -59,7 +59,8 @@ class ProjectsController < ApplicationController
       :name,
       :deadline,
       :completed,
-      :tasks_attributes => [:name, :description, :_destroy]
+      :tasks_attributes => [:name, :description, :_destroy, :deadline, :completed],
+      :task_ids => []
     )
   end
 

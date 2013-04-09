@@ -46,6 +46,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (0.6.16)
+      railties (>= 3.0)
     bootstrap-sass (2.3.0.1)
       sass (~> 3.2)
     builder (3.0.4)
@@ -141,6 +143,7 @@ GEM
       minitest-rails (~> 0.5.0)
       shoulda-matchers (~> 1.4.1)
     multi_json (1.6.1)
+    nested_form (0.3.2)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     pg (0.14.1)
@@ -220,6 +223,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors (>= 0.2.0)
   binding_of_caller (>= 0.6.8)
+  bootstrap-datepicker-rails
   bootstrap-sass (>= 2.1.1.0)
   cancan (>= 1.6.8)
   capybara (>= 2.0.1)
@@ -240,6 +244,7 @@ DEPENDENCIES
   minitest-rails
   minitest-rails-capybara
   minitest-rails-shoulda (= 0.4.1)
+  nested_form
   pg
   quiet_assets (>= 1.0.1)
   rack-cache

@@ -1,3 +1,5 @@
+#= require bootstrap-datepicker
+
 $ = jQuery;
 
 $ ->
@@ -7,6 +9,8 @@ $ ->
   $('.accordion-body').on 'hidden', ->
     e = this.id+'-icon'
     $('#' + e).removeClass("icon-minus").addClass("icon-plus")
+
+  $('.deadline').datepicker() format: 'yyyy-mm-dd'
 
   # $('#complete-task').on 'click', ->
   #     # broadcastDate = $('.broadcast-content').data('page_refreshed_at')

@@ -2,6 +2,7 @@
 //= require_tree .
 //= require_tree ./vendor
 //= require jquery_ujs
+//= require jquery_nested_form
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
@@ -12,7 +13,5 @@ function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regex = new RegExp("new_" + association, "g");
   $(link).parent().after(content.replace(regex, new_id));
-  console.log('kkkkkkkkkkkkkkk');
-  console.log($('#new-task-fields'));
   $('#new-task-fields').modal('show');
 }

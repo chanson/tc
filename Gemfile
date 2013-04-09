@@ -32,6 +32,8 @@ gem 'json'
 gem 'strong_parameters', :git => 'git://github.com/rails/strong_parameters.git', :ref => '9f0c7c4c03a84dcc509a34c6c41161876bcb0757'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.14'
+gem 'nested_form'
+gem 'bootstrap-datepicker-rails'
 
 group :test do
   gem 'minitest'

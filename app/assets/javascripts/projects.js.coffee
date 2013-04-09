@@ -1,14 +1,15 @@
 #= require ./vendor/jquery.chosen.min
+#= require bootstrap-datepicker
 
 $ = jQuery;
 
 $ ->
-  # $('.chzn-select').chosen allow_single_deselect: true
+  $('.chzn-select').chosen allow_single_deselect: true
 
-  # $('.add_fields').on 'click', ->
-  #   setTimeout(->
-  #     $('#project_tasks').find('.chzn-select').chosen()
-  #   50)
+  $('.add_fields').on 'click', ->
+    setTimeout(->
+      $('#project_tasks').find('.chzn-select').chosen()
+    50)
 
   # $target = $('#js-new-task')
 
@@ -49,6 +50,8 @@ $ ->
   #   regex = new RegExp("new_" + association, "g")
   #   $(link).parent().after content.replace(regex, new_id)
   #   $("#new-task-fields").modal "show"
+
+  $('.deadline').datepicker() format: 'yyyy-mm-dd', autoclose: true
 
   rowBuilder = ->
 
@@ -105,3 +108,7 @@ $ ->
   $('#addButton').on 'click', ->
     formHandler.appendFields()
     formHandler.hideForm()
+
+  $('#task-add').on 'click', ->
+    console.log('clicked')
+    $('#new-task-fields').modal('show')
