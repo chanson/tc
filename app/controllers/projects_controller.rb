@@ -27,14 +27,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    user_tasks = @project.tasks
-    @tasks = {}
-    Task::Deadlines::ALL.map do |deadline|
-      tasks = user_tasks.with_deadline(deadline)
-      if tasks.any?
-        @tasks = @tasks.merge({ deadline.to_sym => tasks })
-      end
-    end
+    @tasks = @project.tasks.group_by_deadline
   end
 
   def edit
@@ -65,7 +58,7 @@ class ProjectsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find(params[:ids])
+    @project = Project.find(params[:id])
   end
 
   def find_user_tasks

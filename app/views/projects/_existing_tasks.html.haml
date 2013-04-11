@@ -1,7 +1,0 @@
-%h4 Choose From Existing Uncomplete Tasks:
-= simple_form_for :class => Task, :defaults => { :html => { :class => 'form-vertical' } } do |f|
-  #project_tasks
-    = f.association :tasks, :collection => @tasks, :multiple => true, :input_html => { :class => 'chzn-select' }
-
-  %btn.btn
-    = link_to render(:partial => 'new_tasks'), 'Create New Tasks'

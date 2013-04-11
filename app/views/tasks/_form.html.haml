@@ -1,6 +1,6 @@
 = simple_form_for @task, :defaults => { :html => { :class => 'form-vertical' } } do |f|
   = f.input :name, :autofocus => true
-  = f.input :description
+  = f.input :description, :input_html => { :class => 'description' }
   = f.input :deadline, :as => :string, :input_html => { :class => 'deadline' }
   = f.input :repeatable, :as => :boolean
   = f.input :repeat_type

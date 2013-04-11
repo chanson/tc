@@ -62,6 +62,17 @@ class Task < ActiveRecord::Base
 
   #Methods
 
+  def self.group_by_deadline
+    tasks_hash = {}
+    Task::Deadlines::ALL.map do |deadline|
+      tasks = self.with_deadline(deadline)
+      if tasks.any?
+        tasks_hash = tasks_hash.merge({ deadline.to_sym => tasks })
+      end
+    end
+    tasks_hash
+  end
+
   def user_deadline
     if deadline < Date.today
       Task::Deadlines::EXPIRED

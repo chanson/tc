@@ -7,7 +7,7 @@
       = link_to 'Sign Up', new_user_registration_path
   - else
     %li.dropdown
-      %a.dropdown-toggle{ :href => '#', :data => { :toggle => 'dropdown'} }
+      %a.dropdown-toggle{ :href => '#', :data => { :toggle => 'dropdown' } }
         - avatar = current_user.avatar_image.thumb('25x25#').url if current_user.avatar_image.present?
         = image_tag avatar if avatar.present?
         = current_user.name
@@ -18,8 +18,15 @@
 - if user_signed_in?
   %ul.nav
     %li.dropdown
-      %a.dropdown-toggle{ :href => '#', :data => { :toggle => 'dropdown'} }
+      %a.dropdown-toggle{ :href => '#', :data => { :toggle => 'dropdown' } }
         Tasks
       %ul.dropdown-menu
         %li= link_to 'New Task', new_task_path
         %li= link_to 'View Tasks', tasks_path
+  %ul.nav
+    %li.dropdown
+      %a.dropdown-toggle{ :href => '#', :data => { :toggle => 'dropdown' } }
+        Projects
+      %ul.dropdown-menu
+        %li= link_to 'New Project', new_project_path
+        %li= link_to 'View Projects', projects_path

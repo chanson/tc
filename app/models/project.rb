@@ -18,6 +18,15 @@ class Project < ActiveRecord::Base
     where(:user_id => user_id, :completed => false)
   end
 
+  #methods
+  def completed_tasks
+    self.tasks.where(:completed => true)
+  end
+
+  def uncompleted_tasks
+    self.tasks.where(:completed => false)
+  end
+
   private
 
   def set_defaults

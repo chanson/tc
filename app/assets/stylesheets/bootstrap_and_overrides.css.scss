@@ -9,6 +9,21 @@ body {
   width: 700px;
 }
 
+.small-table-column {
+  max-width: 100px;
+}
+
 .accordion-group {
   background-color: white;
+}
+
+.description {
+  height: 80px;
+  max-height: 120px;
+  width: 600px;
+}
+
+.description-table {
+  height: 20px;
+  max-height: 40px;
 }

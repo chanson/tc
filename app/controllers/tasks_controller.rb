@@ -43,17 +43,11 @@ class TasksController < ApplicationController
   end
 
   def index
-    user_tasks = Task.for_user(current_user)
-    @tasks = {}
-    Task::Deadlines::ALL.map do |deadline|
-      tasks = user_tasks.with_deadline(deadline)
-      if tasks.any?
-        @tasks = @tasks.merge({ deadline.to_sym => tasks })
-      end
-    end
+    @tasks = Task.for_user(current_user).group_by_deadline
   end
 
   def show
+    @tasks = @project.tasks.group_by_deadline
   end
 
   def destroy

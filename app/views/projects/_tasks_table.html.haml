@@ -1,16 +1,16 @@
-%table#tasks-table.table.table-hover.table-striped
-  %thead
+%table#tasks-table.table.table-hover
+  %thead.row
     %th Name
     %th Description
     %th Deadline
     %th Completed
     %th
   %tbody
-    = f.simple_fields_for(:tasks) do |tasks_form|
+    = f.simple_fields_for :tasks, :wrapper => false do |tasks_form|
       %tr.fields
-        %td= tasks_form.input :name, :autofocus => true
-        %td= tasks_form.input :description
-        %td= tasks_form.input :deadline, :as => :string, :input_html => { :class => 'deadline' }
-        %td= tasks_form.input :completed
+        %td= tasks_form.input :name, :label => false, :input_html => { :class => 'small-table-column' }
+        %td= tasks_form.input :description, :label => false, :input_html => { :class => 'description-table' }
+        %td= tasks_form.input :deadline, :as => :string, :input_html => { :class => 'small-table-column deadline' }, :label => false
+        %td= tasks_form.input :completed, :label => false
         %td
           = tasks_form.link_to_remove '<i class="icon-remove"></i>'.html_safe, :title => "Delete this Task."
