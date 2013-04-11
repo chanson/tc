@@ -3,7 +3,7 @@ Tc::Application.routes.draw do
     root :to => 'home#index'
   end
   root :to => "home#index"
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
 
   resources :tasks do
@@ -11,4 +11,8 @@ Tc::Application.routes.draw do
   end
 
   resources :projects
+
+  resources :groups, :except => :index
+
+  resources :invites, :only => [:create, :destroy]
 end

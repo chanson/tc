@@ -14,8 +14,11 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :avatar_image, :retained_avatar_image, :remove_avatar_image
 
-  has_many :tasks
-  has_many :projects
+  has_many :tasks, :dependent => :destroy
+  has_many :projects, :dependent => :destroy
+  has_many :invites, :dependent => :destroy
+
+  has_and_belongs_to_many :groups
 
   before_create :assign_role
 

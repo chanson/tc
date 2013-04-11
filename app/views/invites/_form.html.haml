@@ -1,0 +1,5 @@
+= simple_nested_form_for @group, :defaults => { :html => { :class => 'form-vertical' } } do |f|
+  = render('invites/invites_table', :f => f)
+  = f.link_to_add "Invite another!", :invites, :class => "btn btn-primary", :data => { :target => "#invites-table" }
+
+  = f.button :submit, :class => 'btn-primary'

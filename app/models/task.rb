@@ -9,6 +9,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :project
+  belongs_to :group
 
   with_options(:if => :repeatable) do |t|
     t.validates_presence_of :repeat_type

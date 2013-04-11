@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1 Hello #{@friend.name}!
+    %p
+      Your friend #{@user.name} has invited you to join their group #{@group.name} on TasketCase.
+      Click the link below to join become a member of their team!
+      %br/
+      = url_for(:controller => '/registrations', :action => 'update', :method => :put, :user => {:id => @friend.id}, :group => { :group_id => @group.id }, :only_path => false)

@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1 Hello!
+    %p
+      Your friend #{@user.name} has invited you to join their group #{@group.name} on TasketCase.
+      Click the link below to join the program and become a member of their team!
+      %br/
+      = link_to "Signup and Join the Group", new_user_registration_url(:group => { :group_id => @group.id })

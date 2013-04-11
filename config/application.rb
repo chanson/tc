@@ -73,6 +73,10 @@ module Tc
       'vendor/chosen.css'
     ]
 
+    config.active_record.observers = [
+      :invite_observer
+    ]
+
     # config.to_prepare do
     #   Devise::SessionsController.layout "sign_in"
     # end

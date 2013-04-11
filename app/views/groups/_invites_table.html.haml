@@ -1,0 +1,11 @@
+%table#invites-table.table.table-hover
+  %thead.row
+    %th Email
+    %th
+  %tbody
+    = f.simple_fields_for :invites, :wrapper => false do |invites_form|
+      %tr.fields
+        %td= invites_form.input :email, :label => false, :input_html => { :class => 'small-table-column' }
+        %td
+          = invites_form.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
+          = invites_form.link_to_remove '<i class="icon-remove"></i>'.html_safe, :title => "Delete this Invite."

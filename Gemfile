@@ -34,6 +34,7 @@ gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.14'
 gem 'nested_form'
 gem 'bootstrap-datepicker-rails'
+gem 'validates_email_format_of'
 
 group :test do
   gem 'minitest'

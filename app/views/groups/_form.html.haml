@@ -1,0 +1,20 @@
+= simple_nested_form_for @group, :defaults => { :html => { :class => 'form-vertical' } } do |f|
+  = f.input :name
+  = f.file_field :logo_image, :label => 'Optional'
+  = f.check_box :remove_logo_image if @group.logo_image_uid
+  = image_tag @group.logo_image.thumb('100x100').url if @group.logo_image_uid
+  = f.input :retained_logo_image, :as => :hidden
+  - if f.object.new_record?
+    = f.input :owner_id, :as => :hidden, :input_html => { :value => current_user.id }
+  - elsif @group.owner_id != current_user.id
+    = f.input :owner_id, :as => :hidden, :input_html => { :value => @group.owner_id }
+  - else
+    = f.input :owner_id, :as => :select, :collection => @group_users, :input_html =>{ :class => 'chzn-select' }
+  - if !f.object.new_record? && @group.owner_id == current_user.id
+    = link_to 'Delete This Group', :method => :destroy, :confirm => 'Are you sure you want to permanently remove this group and all associated projects, tasks, and information?'
+
+  %h4 Invite others to join your group!
+  = render('invites_table', :f => f)
+  = f.link_to_add "Invite another!", :invites, :class => "btn btn-primary", :data => { :target => "#invites-table" }
+
+  = f.button :submit, :class => 'btn-primary'

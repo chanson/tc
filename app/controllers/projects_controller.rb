@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update_attributes(project_params)
+    if @project.update_attributes(params_project)
       redirect_to projects_path
     else
       flash.now[:error] = @project.errors.full_messages.join(', ')

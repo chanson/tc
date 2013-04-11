@@ -2,8 +2,19 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @users = User.all
+    if params[:user].present? && params[:group].present?
+      if params[:group][:group_id].present? && params[:user][:id]
+        user = User.find(params[:user][:id])
+        group = Group.find(params[:group][:group_id])
+        unless user.groups.where(:id => group.id).any?
+          user.groups << group
+        end
+        redirect_to group_path(group), :notice => 'Welcome to the group!'
+      end
+    else
+      authorize! :index, @user, :message => 'Not authorized as an administrator.'
+      @users = User.all
+    end
   end
 
   def show
@@ -11,9 +22,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize! :update, @user, :message => 'Not authorized as an administrator.'
+    # authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user], :as => :admin)
+    if @user.update_attributes(params[:user])#, :as => :admin)
       redirect_to users_path, :notice => "User updated."
     else
       redirect_to users_path, :alert => "Unable to update user."

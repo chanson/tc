@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
   validates :completed, :inclusion => { :in => [true, false] }
 
   belongs_to :user
+  belongs_to :group
 
   has_many :tasks, :dependent => :destroy
   accepts_nested_attributes_for :tasks, :allow_destroy => true, :reject_if => :all_blank

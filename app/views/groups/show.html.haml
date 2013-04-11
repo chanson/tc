@@ -1,0 +1,13 @@
+%div
+  //Div group image left..or be empty and hold place if no image
+  = image_tag @group.logo_image.thumb('125x125#').url if @group.logo_image.present?
+  //div group right..name, owner, active projects/project tasks/tasks
+  %h4 Group #{@group.name}
+  Group Manager: #{@owner.name}
+  Active Projects: #{@group.projects.where(:completed => false).count}
+  Active Tasks: #{@group.tasks.where(:completed => false).count}
+  Completed Projects: #{@group.projects.where(:completed => true).count}
+  Completed Tasks: #{@group.tasks.where(:completed => true).count}
+%div
+  - @group.users.each do |u|
+    %ul= link_to u.name, user_path(u)

@@ -1,0 +1,3 @@
+Hello <%= @friend.name %>! Your friend <%= @user.name %> has invite you to join their group!
+Click the link below to become a part of their team.
+<%= link_to "Join the Group", users_url(:user => { :id => @friend.id }, :group => { :group_id => @group.id }), :method => :put %>

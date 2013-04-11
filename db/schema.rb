@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403024517) do
+ActiveRecord::Schema.define(:version => 20130416224947) do
+
+  create_table "groups", :force => true do |t|
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "owner_id"
+    t.string   "name"
+    t.string   "logo_image_uid"
+    t.string   "logo_image_name"
+  end
+
+  create_table "groups_users", :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  create_table "invites", :force => true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130403024517) do
     t.boolean  "completed"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "group_id"
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
@@ -47,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20130403024517) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "project_id"
+    t.integer  "group_id"
   end
 
   create_table "users", :force => true do |t|
