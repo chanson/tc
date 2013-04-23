@@ -10,6 +10,14 @@ class InvitesController < ApplicationController
     end
   end
 
+  def new
+    @invite = Invite.new
+  end
+
+  def destroy
+    Invite.find(params[:id]).destroy
+  end
+
   private
 
   def params_invite

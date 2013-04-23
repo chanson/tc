@@ -1,0 +1,6 @@
+%tr
+  %td= truncate(project.name, :length => 45, :omission => '...')
+  %td= project.user_name
+  %td= project.completed_tasks.count
+  %td= project.updated_at.strftime('%Y-%m-%d')
+  %td= link_to 'View', project_path(project)

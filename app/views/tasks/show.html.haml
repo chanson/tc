@@ -1,2 +1,11 @@
-%h1= @task.name
-%p= @task.description
+%div.clearfix
+  %h3.pull-left= @task.name
+  = link_to 'Edit Task', edit_task_path(@task), :class => 'pull-right btn btn-primary'
+%p= "Task Owner: #{@task.user_name}"
+-if @project.present?
+  %p= "Project: #{link_to @project.name, project_path(@project)}".html_safe
+-if @group.present?
+  %p= "Group: #{link_to @group.name, group_path(@group)}".html_safe
+-if @task.deadline.present?
+  %p= "This task is due on #{@task.deadline.strftime('%Y-%m-%d')}"
+%p= "Details: <br>#{@task.description}".html_safe

@@ -1,11 +1,8 @@
 %tr
-  %td= task.name
-  %td= task.deadline
-  %td= task.repeatable
+  %td= truncate(task.name, :length => 30, :omission => '...')
+  %td= task.deadline.strftime('%Y-%m-%d')
   %td= task.completed
   %td= link_to 'View', task_path(task)
   %td= link_to 'Edit', edit_task_path(task)
-  %td= link_to '  <i class="icon-ok"></i>  '.html_safe, task_complete_task_path(:task_id => task.id), :method => :post#:controller => :tasks, :action => :complete_task, :id => task.id
-  /%td= link_to_void '<i class="icon-ok"></i>'.html_safe, :class => 'complete-task', :title => 'Complete this task', :id => 'complete-task', :data => { :task => task.id }
-  / #:method => :post, :data => { :type => 'html', :remote => true }
+  %td= link_to '  <i class="icon-ok"></i>  '.html_safe, task_complete_task_path(:task_id => task.id), :method => :post
   %td= link_to '  <i class="icon-remove"></i>  '.html_safe, task_path(task), :method => :delete, :confirm => 'Are you sure you want to delete this task?'

@@ -1,8 +1,18 @@
-%h3 User
-%p
-  = image_tag @user.avatar_image.thumb('200x200#').url if @user.avatar_image.present?
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
-%p
-  = "Total Tasks Completed: #{@user.completed_count}"
+%h3 User Profile
+%div.clearfix
+  %div.group-left
+    = image_tag @user.avatar_image.thumb('200x200#').url if @user.avatar_image.present?
+  %div.group-right
+    User: #{@user.name}
+    %br/
+    Email: #{@user.email if @user.email}
+    %br/
+    = "Joined on #{@user.created_at.strftime('%Y-%m-%d')}"
+    %br/
+    = "Last Login: #{@user.last_sign_in_at.strftime('%Y-%m-%d')}"
+    %br/
+    = "Total Tasks Completed: #{@user.completed_count}"
+    %br/
+    = "Total Projects Completed: #{@user.projects.completed.count}"
+    %br/
+    = "Member of #{@user.groups.count} groups"

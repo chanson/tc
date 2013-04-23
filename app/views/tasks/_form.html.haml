@@ -2,6 +2,7 @@
   = f.input :name, :autofocus => true
   = f.input :description, :input_html => { :class => 'description' }
   = f.input :deadline, :as => :string, :input_html => { :class => 'deadline' }
-  = f.input :repeatable, :as => :boolean
-  = f.input :repeat_type
+  - if @group.present?
+    = f.input :group_id, :as => :hidden, :input_html => { :value => @group.id }
   = f.button :submit, :class => 'btn-primary'
+  = link_to 'Cancel', :back, :class => 'btn btn-primary'

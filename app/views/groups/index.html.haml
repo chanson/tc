@@ -1,0 +1,28 @@
+%div.clearfix
+  %h3.pull-left Groups:
+  = link_to 'New Group', new_group_path, :class => 'pull-right btn btn-primary'
+-if @groups.present?
+  %table.table.table-hover.table-striped
+    %tr
+      %th Name
+      %th Owner
+      %th Members
+      %th Active Projects
+      %th Completed Projects
+      %th Active Tasks
+      %th Completed Tasks
+      %th
+      %th
+    - @groups.each do |group|
+      %tr
+        %td= group.name
+        %td= group.owner_name
+        %td= group.users.count
+        %td= group.active_projects_count
+        %td= group.completed_projects_count
+        %td= group.active_tasks_count
+        %td= group.completed_tasks_count
+        %td= link_to 'View', group
+        %td= link_to 'Edit', edit_group_path(group)
+-else
+  You are not a member of any groups.

@@ -74,7 +74,8 @@ module Tc
     ]
 
     config.active_record.observers = [
-      :invite_observer
+      :invite_observer,
+      :task_observer
     ]
 
     # config.to_prepare do

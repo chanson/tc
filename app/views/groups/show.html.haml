@@ -1,13 +1,115 @@
-%div
-  //Div group image left..or be empty and hold place if no image
-  = image_tag @group.logo_image.thumb('125x125#').url if @group.logo_image.present?
-  //div group right..name, owner, active projects/project tasks/tasks
-  %h4 Group #{@group.name}
-  Group Manager: #{@owner.name}
-  Active Projects: #{@group.projects.where(:completed => false).count}
-  Active Tasks: #{@group.tasks.where(:completed => false).count}
-  Completed Projects: #{@group.projects.where(:completed => true).count}
-  Completed Tasks: #{@group.tasks.where(:completed => true).count}
-%div
-  - @group.users.each do |u|
-    %ul= link_to u.name, user_path(u)
+%div.clearfix
+  %div.group-left
+    %div.group-logo
+      = image_tag @group.logo_image.thumb('200x200#').url if @group.logo_image.present?
+    %div.collection
+      %p.heading Group Members:
+      - @group.users.each do |u|
+        %li= link_to u.name, user_path(u)
+
+  %div.group-right
+    %div.group-head.clearfix
+      %div.group-head-left
+        %h3= @group.name
+        %h5= "Leader: #{@group.owner_name}"
+      %div.group-head-right
+        %div.collection
+          %p.heading Actions:
+          - if current_user.id == @group.owner_id
+            %li= link_to 'Edit Group', edit_group_path(@group)
+          %li= link_to 'Invite Members', edit_group_path(@group, :invites => true )
+          %li= link_to 'Create Project', new_project_path(:group_id => @group.id)
+          %li= link_to 'Create Task', new_task_path(:group_id => @group.id)
+    %div.group-body
+      %div.group-projects
+        %ul.nav.nav-tabs
+          %li.active
+            = link_to 'Active Projects', '#pane1', :data => { :toggle => 'tab' }
+          %li
+            = link_to 'Completed Projects', '#pane2', :data => { :toggle => 'tab' }
+
+        .tab-content
+          .tab-pane#pane1.active
+            - if @incomplete_projects.present?
+              %table.table.table-striped
+                %thead
+                  %tr
+                    %th Name
+                    %th Owner
+                    %th Remaining Subtasks
+                    %th Completed Subtasks
+                    %th Deadline
+                    %th
+                  %tbody
+                    = render :partial => 'project', :collection => @incomplete_projects, :as => :project
+            - else
+              %p This group has no active projects.
+
+          .tab-pane#pane2
+            - if @complete_projects.present?
+              %table.table.table-striped
+                %thead
+                  %tr
+                    %th Name
+                    %th Owner
+                    %th Completed Subtasks
+                    %th Completed On
+                    %th
+                  %tbody
+                    = render :partial => 'completed_project', :collection => @complete_projects, :as => :project
+            - else
+              %p This group has no completed projects.
+
+      %div.group-tasks
+        %ul.nav.nav-tabs
+          %li.active
+            = link_to 'Active Tasks', '#pane3', :data => { :toggle => 'tab' }
+          %li
+            = link_to 'Completed Tasks', '#pane4', :data => { :toggle => 'tab' }
+          %li
+            = link_to 'Your Current Tasks', '#pane5', :data => { :toggle => 'tab' }
+
+        .tab-content
+          .tab-pane#pane3.active
+            - if @incomplete_tasks.present?
+              %table.table.table-striped
+                %thead
+                  %tr
+                    %th Name
+                    %th Owner
+                    %th Deadline
+                    %th
+                    %th
+                  %tbody
+                    = render :partial => 'task', :collection => @incomplete_tasks, :as => :task
+            - else
+              %p This group has no active tasks.
+
+          .tab-pane#pane4
+            - if @complete_tasks.present?
+              %table.table.table-striped
+                %thead
+                  %tr
+                    %th Name
+                    %th Owner
+                    %th Completed On
+                    %th
+                  %tbody
+                    = render :partial => 'completed_task', :collection => @complete_tasks, :as => :task
+            - else
+              %p This group has no completed tasks.
+
+          .tab-pane#pane5
+            - if @user_tasks.present?
+              %table.table.table-striped
+                %thead
+                  %tr
+                    %th Name
+                    %th Deadline
+                    %th Project
+                    %th
+                    %th
+                  %tbody
+                    = render :partial => 'user_task', :collection => @user_tasks, :as => :task
+            - else
+              %p You own no tasks in this group. Your team memebers would be happy to change that!

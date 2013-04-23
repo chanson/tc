@@ -1,0 +1,5 @@
+%tr
+  %td= truncate(task.name, :length => 45, :omission => '...')
+  %td= task.user_name
+  %td= task.updated_at.strftime('%Y-%m-%d')
+  %td= link_to 'View', task_path(task)

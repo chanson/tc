@@ -2,7 +2,7 @@ module TaskHelper
   def deadlineString(deadline)
     case deadline
     when :expired
-      "Expired"
+      "Past Due"
     when :today
       "Today"
     when :tomorrow

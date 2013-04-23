@@ -1,12 +1,42 @@
 @import "bootstrap";
 body {
-  padding-top: 60px;
-  background-image: url("/assets/paper002.jpg");
+  padding-top: 85px;
 }
 @import "bootstrap-responsive";
 
+.navbar {
+  font-size: 18px;
+  max-height: 80px;
+}
+
+.navbar-inner {
+  background-image: url("/assets/header-bg.jpeg");
+  background-repeat:repeat-x;
+}
+
+.navbar-inner .container {
+  width: 950px;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.nav {
+  padding-top: 19px;
+}
+
+.content {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 2px #888888;
+}
+
 .container {
-  width: 700px;
+  width: 950px;
 }
 
 .small-table-column {
@@ -26,4 +56,105 @@ body {
 .description-table {
   height: 20px;
   max-height: 40px;
+}
+
+.title-left {
+  float: left;
+}
+
+.title-right {
+  float: right;
+}
+
+.left {
+  width: 65%;
+  float: left;
+  padding: 8px;
+}
+
+.right {
+  width: 30%;
+  float: right;
+  padding: 8px;
+}
+
+.group-left {
+  width: 20%;
+  float: left;
+  padding: 8px;
+}
+
+.group-right {
+  width: 75%;
+  float: right;
+  padding: 8px;
+}
+
+.group-logo {
+  width: 150px;
+  height: 150px;
+}
+
+.group-head {
+  height: 150px;
+}
+
+.group-head-left {
+  float: left;
+}
+
+.group-head-right {
+  float: right;
+}
+
+.group-projects {
+  max-height: 500px;
+}
+
+.group-tasks {
+  max-height: 500px;
+}
+
+.history {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E0DDDD;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  list-style-type: none;
+  padding: 10px;
+  background-image: url("/assets/hist-bg.jpeg");
+  background-size: 100%;
+  -webkit-background-size: 100%;
+}
+
+.heading {
+  text-align: center;
+  margin: auto;
+  font: bold;
+}
+
+.collection {
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E0DDDD;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  list-style-type: none;
+  padding: 10px;
+  background-image: url("/assets/hist-bg.jpeg");
+  background-size: 100%;
+  -webkit-background-size: 100%;
+}
+
+.collection li {
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #E0DDDD;
+  padding: 3px;
+}
+
+.collection p {
+  padding: 3px;
 }

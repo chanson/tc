@@ -1,6 +1,6 @@
 Tc::Application.routes.draw do
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'home#authed'
   end
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
@@ -12,7 +12,7 @@ Tc::Application.routes.draw do
 
   resources :projects
 
-  resources :groups, :except => :index
+  resources :groups
 
-  resources :invites, :only => [:create, :destroy]
+  resources :invites, :only => [:create, :destroy, :new]
 end

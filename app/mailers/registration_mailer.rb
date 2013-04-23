@@ -6,7 +6,7 @@ class RegistrationMailer < ActionMailer::Base
     @user = User.find(invite.user_id)
     @group = Group.find(invite.group_id)
 
-    mail(:to => invite.email, :subject => "Join your friend's group on TasketCase")
+    mail(:to => invite.email, :subject => "Join your friend's group on TskIt")
   end
 
   def group(invite)
@@ -15,6 +15,6 @@ class RegistrationMailer < ActionMailer::Base
     @group = Group.find(invite.group_id)
     @friend = User.where(:email => invite.email).first
 
-    mail(:to => invite.email, :subject => "Join your friend's group at TasketCase")
+    mail(:to => invite.email, :subject => "Join your friend's group at TskIt")
   end
 end

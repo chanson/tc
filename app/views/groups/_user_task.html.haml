@@ -1,0 +1,6 @@
+%tr
+  %td= truncate(task.name, :length => 45, :omission => '...')
+  %td= task.deadline.strftime('%Y-%m-%d')
+  %td= task.project.present? ? task.project.name : '-'
+  %td= link_to 'View', task_path(task)
+  %td= link_to '  <i class="icon-ok"></i>  '.html_safe, task_complete_task_path(:task_id => task.id), :method => :post

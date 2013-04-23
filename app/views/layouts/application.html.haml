@@ -2,10 +2,9 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-    %title= content_for?(:title) ? yield(:title) : "App_Name"
-    %meta{:content => content_for?(:description) ? yield(:description) : "App_Name", :name => "description"}
+    %title= content_for?(:title) ? yield(:title) : "TskIt"
+    %meta{:content => content_for?(:description) ? yield(:description) : "TskIt", :name => "Organize yourself and your team on the cloud with TskIt, the web's best task manager."}
     = stylesheet_link_tag :application, :media => "all"
-    = javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js'
     = javascript_include_tag :application
     = csrf_meta_tags
     = yield(:head)

@@ -14,9 +14,10 @@ class Project < ActiveRecord::Base
 
   #scopes
   scope :completed, where(:completed => true)
+  scope :incomplete, where(:completed => false)
 
-  def self.active_for_user(user_id)
-    where(:user_id => user_id, :completed => false)
+  def self.for_user(user_id)
+    where(:user_id => user_id, :group_id => nil)
   end
 
   #methods
@@ -26,6 +27,10 @@ class Project < ActiveRecord::Base
 
   def uncompleted_tasks
     self.tasks.where(:completed => false)
+  end
+
+  def user_name
+    self.user.name
   end
 
   private

@@ -1,2 +1,4 @@
-%h2=@task.name
+%div.clearfix
+  %h3.pull-left=@task.name
+  = link_to 'Destroy', @task, :method => :delete, :data => { :confirm => 'Are you sure you want to delete this task?' }, :class => 'pull-right btn btn-primary'
 = render 'form'

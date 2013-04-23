@@ -1,2 +1,4 @@
-%h2=@project.name
+%div.clearfix
+  %h3.pull-left=@project.name
+  = link_to 'Destroy', @project, :method => :delete, :data => { :confirm => 'Are you sure you want to delete this project and all subtasks?' }, :class => 'pull-right btn btn-primary'
 = render 'form'

@@ -30,4 +30,16 @@ class User < ActiveRecord::Base
   def completed_count
     self.tasks.completed.count
   end
+
+  def completed_projects_count
+    self.projects.completed.count
+  end
+
+  def active_count
+    self.tasks.incomplete.count
+  end
+
+  def active_projects_count
+    self.projects.incomplete.count
+  end
 end

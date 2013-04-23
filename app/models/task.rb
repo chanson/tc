@@ -30,6 +30,7 @@ class Task < ActiveRecord::Base
 
   #Scopes
   scope :completed, where(:completed => true)
+  scope :incomplete, where(:completed => false)
 
   def self.with_deadline(deadline)
     deadline = Task::Deadlines::ANY if deadline.blank?
@@ -88,6 +89,10 @@ class Task < ActiveRecord::Base
     else
       Task::Deadlines::FUTURE
     end
+  end
+
+  def user_name
+    self.user.name
   end
 
   private

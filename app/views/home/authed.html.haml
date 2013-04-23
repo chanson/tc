@@ -1,0 +1,49 @@
+%div.clearfix
+  %div.left
+    %h5 Tasks:
+    -if @tasks.present?
+      %div.accordion{ :id => 'taskAccordion' }
+        - @tasks.each do |deadline, tasks|
+          %div.accordion-group
+            %div.accordion-heading.clearfix
+              %a.accordion-toggle.pull-left{ :data => { :toggle => 'collapse', :target => "##{deadline}" } }
+                = deadlineString(deadline)
+              %i.icon-plus.pull-right{ :id => "#{deadline}-icon" }
+            %div.accordion-body.collapse{ :id => deadline }
+              %div.accordion-inner
+                %table.table.table-striped.table-hover
+                  %thead
+                    %tr
+                      %th Name
+                      %th Deadline
+                      %th Completed
+                    %tbody
+                      = render :partial => 'tasks/task', :collection => tasks, :as => :task
+    -else
+      %p= "You have no tasks yet! Make one #{link_to 'here.', new_task_path}".html_safe
+
+  %div.right
+    %div.history
+      %p.heading= "#{@user.name}'s History:"
+      %li= "Tasks Completed: #{@user.completed_count}"
+      %li= "Projects Completed: #{@user.completed_projects_count}"
+      %li= "Active Tasks: #{@user.active_count}"
+      %li= "Active Projects: #{@user.active_projects_count}"
+    %div.collection
+      %p.heading= "Active Projects:"
+      -if @projects.present?
+        - @projects.each do |p|
+          %li= link_to truncate(p.name, :length => 40, :omission => '...'), project_path(p)
+        -if @other_projects_count.present? && @other_projects_count > 0
+          %p= link_to "...and #{@other_projects_count} more projects", projects_path
+      -else
+        %li= "You have not created any projects yet! Create one #{link_to 'here.', new_project_path}".html_safe
+    %div.collection
+      %p.heading= "Groups:"
+      -if @groups.present?
+        - @groups.each do |g|
+          %li= link_to truncate(g.name, :length => 40, :omission => '...'), group_path(g)
+        -if @other_groups_count.present? && @other_groups_count > 0
+          %p= link_to "...and #{@other_groups_count} more groups", groups_path
+      -else
+        %li= "You are not a member of any groups yet! Create one and invite your friends #{link_to 'here.', new_group_path}".html_safe

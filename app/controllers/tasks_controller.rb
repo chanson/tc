@@ -1,20 +1,14 @@
 class TasksController < ApplicationController
   before_filter :find_task, :only => [:edit, :update, :show, :destroy]
   before_filter :find_task_two, :only => [:complete_task]
+  before_filter :find_group, :only => [:edit, :new]
 
   def create
     @task = Task.create(task_params.merge({ :user_id => current_user.id }))
 
-    # if @task.save
-    #   redirect_to tasks_path, :notice => 'Task created.'
-    # else
-    #   flash[:error] = @task.errors.full_messages.join(', ')
-    #   render :edit
-    # end
-
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to task_path(@task), notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
         format.html { render action: "new" }
@@ -47,7 +41,8 @@ class TasksController < ApplicationController
   end
 
   def show
-    @tasks = @project.tasks.group_by_deadline
+    @group = @task.group
+    @project = @task.project
   end
 
   def destroy
@@ -57,13 +52,25 @@ class TasksController < ApplicationController
 
   def complete_task
     if @task.update_attributes({ :completed => !@task.completed })
-      redirect_to tasks_path, :success => 'Task updated.'
+      if @task.group_id.present?
+        redirect_to group_path(@task.group), :success => 'Task completed.'
+      else
+        redirect_to tasks_path, :success => 'Task completed.'
+      end
     else
-      render :index, :error => 'Could not update task.'
+      render :index, :error => 'Could not complete task.'
     end
   end
 
   private
+
+  def find_group
+    if params[:group_id].present?
+      @group = Group.find(params[:group_id])
+    else
+      @group = @project.try(:group_id) || nil
+    end
+  end
 
   def find_task
     @task = Task.find(params[:id])
@@ -85,6 +92,7 @@ class TasksController < ApplicationController
       :repeatable,
       :repeat_type,
       :completed,
+      :group_id,
       :tasks_attributes
     )
   end

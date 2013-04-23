@@ -1,0 +1,7 @@
+%tr
+  %td= truncate(project.name, :length => 45, :omission => '...')
+  %td= project.user_name
+  %td= project.uncompleted_tasks.count
+  %td= project.completed_tasks.count
+  %td= project.deadline.present? ? project.deadline.strftime('%Y-%m-%d') : '-'
+  %td= link_to 'View', project_path(project)

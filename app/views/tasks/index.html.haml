@@ -1,21 +1,23 @@
 %div.clearfix
-  %h3.pull-left= "Tasks for #{current_user.name}:"
-  %button.btn.pull-right= link_to 'New Task', new_task_path
-%div.accordion{ :id => 'taskAccordion' }
-  - @tasks.each do |deadline, tasks|
-    %div.accordion-group
-      %div.accordion-heading.clearfix
-        %a.accordion-toggle.pull-left{ :data => { :toggle => 'collapse', :target => "##{deadline}" } }
-          = deadlineString(deadline)
-        %i.icon-plus.pull-right{ :id => "#{deadline}-icon" }
-      %div.accordion-body.collapse{ :id => deadline }
-        %div.accordion-inner
-          %table.table-striped
-            %thead
-              %tr
-                %th Name
-                %th Deadline
-                %th Repeatable
-                %th Completed
-              %tbody
-                = render :partial => 'task', :collection => tasks, :as => :task
+  %h3.pull-left= "Your Tasks:"
+  = link_to 'New Task', new_task_path, :class => 'pull-right btn btn-primary'
+-if @tasks.present?
+  %div.accordion{ :id => 'taskAccordion' }
+    - @tasks.each do |deadline, tasks|
+      %div.accordion-group
+        %div.accordion-heading.clearfix
+          %a.accordion-toggle.pull-left{ :data => { :toggle => 'collapse', :target => "##{deadline}" } }
+            = deadlineString(deadline)
+          %i.icon-plus.pull-right{ :id => "#{deadline}-icon" }
+        %div.accordion-body.collapse{ :id => deadline }
+          %div.accordion-inner
+            %table.table.table-striped.table-hover
+              %thead
+                %tr
+                  %th Name
+                  %th Deadline
+                  %th Completed
+                %tbody
+                  = render :partial => 'task', :collection => tasks, :as => :task
+-else
+  You have not created any tasks yet.

@@ -7,5 +7,6 @@
     else
       RegistrationMailer.invite(invite).deliver
     end
+    invite.destroy
   end
 end

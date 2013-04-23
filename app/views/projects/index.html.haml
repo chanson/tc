@@ -1,25 +1,28 @@
-%h1 Projects:
-%table.table.table-hover.table-striped
-  %tr
-    %th Name
-    %th Deadline
-    %th Total Tasks
-    %th Tasks Completed
-    %th Tasks Left
-    %th Complete?
-    %th
-    %th
-    %th
-  - @projects.each do |project|
+%div.clearfix
+  %h3.pull-left Your Projects:
+  = link_to 'New Project', new_project_path, :class => 'pull-right btn btn-primary'
+-if @projects.present?
+  %table.table.table-hover.table-striped
     %tr
-      %td= project.name
-      %td= project.deadline
-      %td= project.tasks.count
-      %td= project.completed_tasks.count
-      %td= project.uncompleted_tasks.count
-      %td= project.completed? ? 'Completed' : 'In Progress'
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
-%br/
-= link_to 'New Project', new_project_path
+      %th Name
+      %th Deadline
+      %th Total Tasks
+      %th Tasks Completed
+      %th Tasks Left
+      %th Status
+      %th
+      %th
+      %th
+    - @projects.each do |project|
+      %tr
+        %td= truncate(project.name, :length => 45, :omission => '...')
+        %td= project.deadline.present? ? project.deadline.strftime('%Y-%m-%d') : '-'
+        %td= project.tasks.count
+        %td= project.completed_tasks.count
+        %td= project.uncompleted_tasks.count
+        %td= project.completed? ? 'Completed' : 'In Progress'
+        %td= link_to 'Show', project
+        %td= link_to 'Edit', edit_project_path(project)
+        %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+-else
+  You haven't made any projects yet.

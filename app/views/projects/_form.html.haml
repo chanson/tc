@@ -1,12 +1,16 @@
 %h3 Project Information
 = simple_nested_form_for @project, :defaults => { :html => { :class => 'form-vertical' } } do |f|
-  = f.input :name, :autofocus => true
-  = f.input :description, :as => :text, :input_html => { :class => 'description' }
-  = f.input :deadline, :as => :string, :placeholder => 'YYYY-MM-DD', :input_html => { :class => 'deadline' }
-  = f.association :tasks, :collection => @tasks, :multiple => true, :input_html => { :class => 'chzn-select' }
-
-  = "For project  #{ @project.name }" unless @project.name.blank?
-  = render('tasks_table', :f => f)
-  = f.link_to_add "Add a task", :tasks, :class => "btn btn-primary", :data => { :target => "#tasks-table" }
-
+  -if @tasks_only.nil? || f.object.new_record?
+    = f.input :name, :autofocus => true
+    = f.input :description, :as => :text, :input_html => { :class => 'description' }
+    = f.input :deadline, :as => :string, :placeholder => 'YYYY-MM-DD', :input_html => { :class => 'deadline' }
+    - if @group.present?
+      = f.input :group_id, :as => :hidden, :input_html => { :value => @group.id }
+  -if @tasks_only.present? || f.object.new_record?
+    = "For project  #{ @project.name }" unless @project.name.blank?
+    = render('tasks_table', :f => f)
+    = f.link_to_add "Add a task", :tasks, :class => "btn btn-primary", :data => { :target => "#tasks-table" }
+    %br/
+    %br/
   = f.button :submit, :class => 'btn-primary'
+  = link_to 'Cancel', :back, :class => 'btn btn-primary'
