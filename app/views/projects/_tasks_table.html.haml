@@ -2,7 +2,7 @@
   %thead.row
     %th Name*
     %th Description
-    %th Deadline
+    %th Deadline*
     %th Completed
     %th
   %tbody
@@ -13,7 +13,7 @@
           = tasks_form.input :name, :label => false, :input_html => { :class => 'small-table-column' }
         %td
           = tasks_form.input :description, :label => false, :input_html => { :class => 'description-table' }
-        %td= tasks_form.input :deadline, :as => :string, :input_html => { :class => 'small-table-column deadline' }, :label => false
+        %td= tasks_form.input :deadline, :as => :string, :label => false, :placeholder => 'YYYY-MM-DD', :input_html => { :class => 'small-table-column deadline' }
         %td= tasks_form.input :completed, :label => false
         %td
           = tasks_form.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }

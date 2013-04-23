@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
     if params[:group_id].present?
       @group = Group.find(params[:group_id])
     else
-      @group = @project.group
+      @group = @project.try(:group_id) || nil
     end
   end
 

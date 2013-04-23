@@ -33,7 +33,7 @@ gem 'strong_parameters', :git => 'git://github.com/rails/strong_parameters.git',
 gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.14'
 gem 'nested_form'
-gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'validates_email_format_of'
 
 group :test do

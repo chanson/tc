@@ -6,6 +6,10 @@ class Task < ActiveRecord::Base
   validates :name, :presence => true, :length => { :maximum => 255 }
   validates :repeatable, :inclusion => { :in => [true, false] }
   validates :completed, :inclusion => { :in => [true, false] }
+  validates :deadline, :presence => true
+
+  validate :valid_deadline
+  validate :deadline_before_project_deadline
 
   belongs_to :user
   belongs_to :project
@@ -75,32 +79,28 @@ class Task < ActiveRecord::Base
     tasks_hash
   end
 
-  def user_deadline
-    if deadline < Date.today
-      Task::Deadlines::EXPIRED
-    elsif deadline = Date.today
-      Task::Deadlines::TODAY
-    elsif deadline < Date.tomorrow
-      Task::Deadlines:: TOMORROW
-    elsif deadline < 1.week.from_now
-      Task::Deadlines::WEEK
-    elsif deadline < 1.month.from_now
-      Task::Deadlines::MONTH
-    else
-      Task::Deadlines::FUTURE
-    end
-  end
-
   def user_name
     self.user.name
   end
 
   private
 
+  def deadline_before_project_deadline
+    if self.project.present? && deadline.utc < self.project.deadline.utc
+      self.errors.add :deadline, ' must be before the deadline of the parent project (all dates are in UTC time).'
+    end
+  end
+
   def set_defaults
     self.repeatable ||= false
     self.completed ||= false
 
     true
+  end
+
+  def valid_deadline
+    if deadline.utc < Time.now.utc
+      self.errors.add :deadline, ' has to be on or after today (all dates are in UTC time).'
+    end
   end
 end

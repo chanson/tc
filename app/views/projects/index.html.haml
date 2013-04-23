@@ -13,6 +13,7 @@
       %th
       %th
       %th
+      %th
     - @projects.each do |project|
       %tr
         %td= truncate(project.name, :length => 45, :omission => '...')
@@ -23,6 +24,7 @@
         %td= project.completed? ? 'Completed' : 'In Progress'
         %td= link_to 'Show', project
         %td= link_to 'Edit', edit_project_path(project)
+        %td= link_to 'Manage Tasks', edit_project_path(project, :tasks_only => true)
         %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
 -else
   You haven't made any projects yet.

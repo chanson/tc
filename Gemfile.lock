@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: cc793297f77e79aa9aede741cf5b9cf2d2056085
+  specs:
+    bootstrap-datepicker-rails (1.0.0.5)
+      railties (>= 3.0)
+
+GIT
   remote: git://github.com/rails/strong_parameters.git
   revision: 9f0c7c4c03a84dcc509a34c6c41161876bcb0757
   ref: 9f0c7c4c03a84dcc509a34c6c41161876bcb0757
@@ -46,8 +53,6 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
-    bootstrap-datepicker-rails (0.6.16)
-      railties (>= 3.0)
     bootstrap-sass (2.3.0.1)
       sass (~> 3.2)
     builder (3.0.4)
@@ -224,7 +229,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors (>= 0.2.0)
   binding_of_caller (>= 0.6.8)
-  bootstrap-datepicker-rails
+  bootstrap-datepicker-rails!
   bootstrap-sass (>= 2.1.1.0)
   cancan (>= 1.6.8)
   capybara (>= 2.0.1)

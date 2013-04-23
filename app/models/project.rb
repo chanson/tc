@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
   validates :name, :presence => true, :length => { :maximum => 255 }
   validates :completed, :inclusion => { :in => [true, false] }
 
+  validate :valid_deadline
+
   belongs_to :user
   belongs_to :group
 
@@ -39,5 +41,11 @@ class Project < ActiveRecord::Base
     self.completed ||= false
 
     return true
+  end
+
+  def valid_deadline
+    if deadline.utc < Time.now.utc
+      self.errors.add :deadline, ' has to be on or after today (all dates are in UTC time).'
+    end
   end
 end

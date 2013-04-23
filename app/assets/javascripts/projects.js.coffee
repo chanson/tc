@@ -1,5 +1,4 @@
 #= require ./vendor/jquery.chosen.min
-#= require bootstrap-datepicker
 
 $ = jQuery;
 
@@ -11,4 +10,3 @@ $ ->
       $('#project_tasks').find('.chzn-select').chosen()
     50)
 
-  $('.deadline').datepicker({ "format": 'yyyy-mm-dd', "autoclose": true })
